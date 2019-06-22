@@ -1,4 +1,4 @@
-$("li").click(function () {
+$("ul").on("click", "li", function () {
     $(this).toggleClass("completed");
 
     // if ($(this).css("color") === "rgb(128, 128, 128)") {
@@ -18,9 +18,17 @@ $("li").click(function () {
     // // $(this).css("text-decoration", "line-through")
 })
 
-$("span").click(function(event){
-    $(this).parent().fadeOut(1000, function(){
+$("ul").on("click", "span", function (event) {
+    $(this).parent().fadeOut(500, function () {
         $(this).remove();
     })
     event.stopPropagation();
 });
+
+$("input[type='text']").keypress(function(event) {
+    if (event.which === 13) {
+        let todoText = $(this).val();
+        $(this).val(""); //clear input
+        $("ul").append(`<li><span>X</span> ${todoText}</li>`)
+    }
+})
